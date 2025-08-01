@@ -1,0 +1,803 @@
+openapi: 3.0.0
+info:
+  title: API Desafio Tecnico
+  description: Documentação da API do projeto de Desafio Tecnico
+  version: 1.0.0
+paths:
+  /moedas:
+    get:
+      tags:
+        - Moedas
+      summary: Listar todos as moedas
+      operationId: BuscaTodasMoedas
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Moedas'
+    post:
+      tags:
+        - Moedas
+      summary: Criar uma nova moeda
+      operationId: CriaMoedas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostNome'
+      responses:
+        '201':
+          description: Moeda criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Moedas'
+        '400':
+          description: Dados inválidos
+  /moedas/{id}:
+    get:
+      tags:
+        - Moedas
+      summary: Buscar moeda por ID
+      operationId: BuscaMoedaPorID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Moedas'
+        '400':
+          description: ID inválido
+        '404':
+          description: Moeda não encontrada
+    put:
+      tags:
+        - Moedas
+      summary: Atualizar uma moeda
+      operationId: AtualizaMoeda
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Moedas'
+      responses:
+        '200':
+          description: Moeda atualizada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Moedas'
+        '400':
+          description: Dados inválidos
+        '404':
+          description: Moeda não encontrada
+    delete:
+      tags:
+        - Moedas
+      summary: Deleta moeda
+      operationId: DeletaMoeda
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Sucesso
+        '400':
+          description: ID inválido
+        '404':
+          description: Moeda não encontrada
+
+  /reinos:
+    get:
+      tags:
+        - Reinos
+      summary: Listar todos os reinos
+      description: Retorna uma lista contendo todos os reinos
+      operationId: BuscaTodosReinos
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Reinos'
+    post:
+      tags:
+        - Reinos
+      summary: Criar um novo reino
+      operationId: CriaReinos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostNome'
+      responses:
+        '201':
+          description: Reino criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reinos'
+        '400':
+          description: Dados inválidos
+  /reinos/{id}:
+    get:
+      tags:
+        - Reinos
+      summary: Buscar reino por ID
+      operationId: BuscaReinoPorID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reinos'
+        '400':
+          description: ID inválido
+        '404':
+          description: Reino não encontrado
+    put:
+      tags:
+        - Reinos
+      summary: Atualizar um reino
+      operationId: AtualizaReino
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Reinos'
+      responses:
+        '200':
+          description: Reino atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Reinos'
+        '400':
+          description: Dados inválidos
+        '404':
+          description: Reino não encontrado
+    delete:
+      tags:
+        - Reinos
+      summary: Deleta reino
+      operationId: DeletaReino
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Sucesso
+        '400':
+          description: ID inválido
+        '404':
+          description: Reino não encontrado
+
+  /produtos:
+    get:
+      tags:
+        - Produtos
+      summary: Listar todos os produtos
+      operationId: BuscaTodosProdutos
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Produtos'
+    post:
+      tags:
+        - Produtos
+      summary: Criar um novo produto
+      operationId: CriaProdutos
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostProduto'
+      responses:
+        '201':
+          description: Produto criado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produtos'
+        '400':
+          description: Dados inválidos
+  /produtos/{id}:
+    get:
+      tags:
+        - Produtos
+      summary: Buscar protudo por ID
+      operationId: BuscaProdutoPorID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produtos'
+        '400':
+          description: ID inválido
+        '404':
+          description: Produto não encontrado
+    patch:
+      tags:
+        - Produtos
+      summary: Atualizar um produto
+      operationId: AtualizaProduto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchProduto'
+      responses:
+        '200':
+          description: Produto atualizado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Produtos'
+        '400':
+          description: Dados inválidos
+        '404':
+          description: Produto não encontrado
+    delete:
+      tags:
+        - Produtos
+      summary: Deleta produto
+      operationId: DeletaProduto
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Sucesso
+        '400':
+          description: ID inválido
+        '404':
+          description: Produto não encontrado
+
+  /taxas:
+    get:
+      tags:
+        - Taxas
+      summary: Listar todas as taxas
+      operationId: BuscaTodasTaxas
+      parameters:
+        - in: query
+          name: IdMoedaOrigem
+          schema:
+            type: integer
+          description: ID da moeda base da conversão
+        - in: query
+          name: IdMoedaDestino
+          schema:
+            type: integer
+          description: ID da moeda final da conversão
+        - in: query
+          name: IdProduto
+          schema:
+            type: integer
+          description: ID do produto presente na conversão
+        - in: query
+          name: Data Inicial
+          schema:
+            type: string
+            format: date
+            # pattern: '^(19|20)\d{2}/(0[1-9]|1[1,2])/(0[1-9]|[12][0-9]|3[01])$'
+          description: Data inicial das conversões
+        - in: query
+          name: Data Final
+          schema:
+            type: string
+            format: date
+            # pattern: '^(19|20)\d{2}/(0[1-9]|1[1,2])/(0[1-9]|[12][0-9]|3[01])$'
+          description: Data final da conversões
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Taxas'
+    post:
+      tags:
+        - Taxas
+      summary: Criar uma nova taxa
+      operationId: CriaTaxas
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTaxa'
+      responses:
+        '201':
+          description: Taxa criada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Taxas'
+        '400':
+          description: Dados inválidos
+  /taxas/{id}:
+    get:
+      tags:
+        - Taxas
+      summary: Buscar taxa por ID
+      operationId: BuscaTaxaPorID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaxaCompleta'
+        '400':
+          description: ID inválido
+        '404':
+          description: Taxa não encontrada
+
+  /transacoes:
+    get:
+      tags:
+        - Transações
+      summary: Listar todas as transações
+      operationId: BuscaTodasTransacoes
+      parameters:
+        - in: query
+          name: Data inicial
+          schema:
+            type: string
+            format: date
+            # pattern: '^(19|20)\d{2}/(0[1-9]|1[1,2])/(0[1-9]|[12][0-9]|3[01])$'
+          description: Data inicial das transações
+        - in: query
+          name: Data final
+          schema:
+            type: string
+            format: date
+            # pattern: '^(19|20)\d{2}/(0[1-9]|1[1,2])/(0[1-9]|[12][0-9]|3[01])$'
+          description: Data final das transações
+        - in: query
+          name: TipoTransacao
+          schema:
+            type: string
+            enum:
+              - Cambio
+              - Compra
+          description: Tipo da transação efetuada
+        - in: query
+          name: IdProduto
+          schema:
+            type: integer
+          description: ID do produto presente na transação
+        - in: query
+          name: IdReino
+          schema:
+            type: integer
+          description: ID do reino onde foi efetuado a transação
+        - in: query
+          name: IdMoedaOrigem
+          schema:
+            type: integer
+          description: ID da moeda base da transação
+        - in: query
+          name: IdMoedaDestino
+          schema:
+            type: integer
+          description: ID da moeda final da transação
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Transacoes'
+  /transacoes/cambiomoeda:
+    post:
+      tags:
+        - Transações
+      summary: Criar um novo câmbio de moeda
+      operationId: CriaTransacaoCambioMoeda
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTransacaoCambioMoeda'
+      responses:
+        '201':
+          description: Câmbio efetuado com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transacoes'
+        '400':
+          description: Dados inválidos
+  /transacoes/compra:
+    post:
+      tags:
+        - Transações
+      summary: Criar uma nova compra
+      operationId: CriaTransacaoCompra
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PostTransacaoCompra'
+      responses:
+        '201':
+          description: Compra efetuada com sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transacoes'
+        '400':
+          description: Dados inválidos
+  /transacoes/{id}:
+    get:
+      tags:
+        - Transações
+      summary: Buscar transação por ID
+      operationId: BuscaTransacaoPorID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Sucesso
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TransacaoCompleta'
+        '400':
+          description: ID inválido
+        '404':
+          description: Transação não encontrada
+
+components:
+  schemas:
+    Moedas:
+      type: object
+      properties:
+        IdMoeda:
+          type: integer
+        Nome:
+          type: string
+        Ativo:
+          type: boolean
+        # required:
+        #   - Nome
+
+    Reinos:
+      type: object
+      properties:
+        IdReino:
+          type: integer
+        Nome:
+          type: string
+        Ativo:
+          type: boolean
+      # required:
+      #   - Nome
+
+    Produtos:
+      type: object
+      properties:
+        IdProduto:
+          type: integer
+        Descricao:
+          type: string
+        Valor:
+          type: number
+          format: double
+        Moeda:
+          $ref: '#/components/schemas/Moedas'
+        Reino:
+          $ref: '#/components/schemas/Reinos'
+        Ativo:
+          type: boolean
+          # required:
+          #   - Descricao
+          #   - Valor
+          #   - Moeda
+
+    Taxas:
+      type: object
+      properties:
+        IdTaxaMoeda:
+          type: integer
+        Data:
+          type: string
+          format: date
+        IdMoedaOrigem:
+          type: integer
+        Taxa:
+          type: number
+          format: double
+        IdMoedaDestino:
+          type: integer
+        IdProduto:
+          type: integer
+        Operacao:
+          type: integer
+
+    TaxaCompleta:
+      type: object
+      properties:
+        IdTaxaMoeda:
+          type: integer
+        Data:
+          type: string
+          format: date
+        MoedaOrigem:
+          $ref: '#/components/schemas/Moedas'
+        Taxa:
+          type: number
+          format: double
+        MoedaDestino:
+          $ref: '#/components/schemas/Moedas'
+        Produto:
+          $ref: '#/components/schemas/Produtos'
+        Operacao:
+          type: integer
+
+    Transacoes:
+      type: object
+      properties:
+        IdTransacao:
+          type: integer
+        DataTransacao:
+          type: string
+          format: date
+        TipoTransacao:
+          type: string
+          enum:
+            - Cambio
+            - Compra
+        IdProduto:
+          type: integer
+        IdReino:
+          type: integer
+        IdMoedaOrigem:
+          type: integer
+        IdMoedaDestino:
+          type: integer
+        Quantidade:
+          type: number
+          format: double
+        ValorTransacao:
+          type: number
+          format: double
+        ValorFinalTransacao:
+          type: number
+          format: double
+
+    TransacaoCompleta:
+      type: object
+      properties:
+        IdTransacao:
+          type: integer
+        DataTransacao:
+          type: string
+          format: date
+        TipoTransacao:
+          type: string
+          enum:
+            - Cambio
+            - Compra
+        Produto:
+          $ref: '#/components/schemas/Produtos'
+        Reino:
+          $ref: '#/components/schemas/Reinos'
+        MoedaOrigem:
+          $ref: '#/components/schemas/Moedas'
+        MoedaDestino:
+          $ref: '#/components/schemas/Moedas'
+        Quantidade:
+          type: number
+          format: double
+        ValorTransacao:
+          type: number
+          format: double
+        ValorFinalTransacao:
+          type: number
+          format: double
+
+    PostNome:
+      type: object
+      properties:
+        Nome:
+          type: string
+          maxLength: 25
+      required:
+        - Nome
+
+    PostProduto:
+      type: object
+      properties:
+        Descricao:
+          type: string
+          maxLength: 100
+        Valor:
+          type: number
+          format: double
+        IdMoeda:
+          type: integer
+        IdReino:
+          type: integer
+      required:
+        - Descricao
+        - Valor
+        - IdMoeda
+        - IdReino
+
+    PatchProduto:
+      type: object
+      properties:
+        Descricao:
+          type: string
+          maxLength: 100
+        Valor:
+          type: integer
+          format: double
+        Ativo:
+          type: boolean
+
+    PostTaxa:
+      type: object
+      properties:
+        IdMoedaOrigem:
+          type: integer
+        Taxa:
+          type: number
+          format: double
+        IdMoedaDestino:
+          type: integer
+        IdProduto:
+          type: integer
+      required:
+        - IdMoedaOrigem
+        - Taxa
+        - IdMoedaDestino
+
+    PostTransacaoCambioMoeda:
+      type: object
+      properties:
+        # TipoTransacao:
+        #   type: string
+        #   enum:
+        #     - CambioMoeda
+        #     - Compra
+        # IdProduto:
+        #   type: integer
+        IdReino:
+          type: integer
+        IdMoedaOrigem:
+          type: integer
+        IdMoedaDestino:
+          type: integer
+        Quantidade:
+          type: number
+          format: double
+        # ValorFinalTransacao:
+        #   type: number
+        #   format: double
+      required:
+        # - TipoTransacao
+        - IdReino
+        - IdMoedaOrigem
+        - IdMoedaDestino
+        - Quantidade
+        # - ValorFinalTransacao
+
+    PostTransacaoCompra:
+      type: object
+      properties:
+        # TipoTransacao:
+        #   type: string
+        #   enum:
+        #     - CambioMoeda
+        #     - Compra
+        IdProduto:
+          type: integer
+        IdReino:
+          type: integer
+        IdMoedaOrigem:
+          type: integer
+        IdMoedaDestino:
+          type: integer
+        Quantidade:
+          type: number
+          format: double
+        # ValorTransacao:
+        #   type: number
+        #   format: double
+        # ValorFinalTransacao:
+        #   type: number
+        #   format: double
+      required:
+        - IdProduto
+        - IdReino
+        - IdMoedaOrigem
+        - IdMoedaDestino
+        - Quantidade
+        # - ValorFinalTransacao
