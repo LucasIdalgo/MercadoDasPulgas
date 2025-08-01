@@ -1,4 +1,4 @@
-Mercado das Pulgas
+# Mercado das Pulgas
 
 CREATE DATABASE MercadoDePulgas;
 GO
