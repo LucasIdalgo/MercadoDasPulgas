@@ -2,16 +2,16 @@ package com.challenge.Desafio.Repositories;
 
 import com.challenge.Desafio.Entities.TaxaMoedaEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface TaxaRepository extends JpaRepository<TaxaMoedaEntity, Long> {
+public interface TaxaRepository extends JpaRepository<TaxaMoedaEntity, Long>, JpaSpecificationExecutor<TaxaMoedaEntity> {
     @Query(value = """           
             SELECT	T.id_taxa_moeda,
                     T.data,
@@ -45,8 +45,8 @@ public interface TaxaRepository extends JpaRepository<TaxaMoedaEntity, Long> {
                     T.id_produto,
                     T.operacao
             FROM Taxa_Moeda		AS T WITH(NOLOCK)
-            WHERE	T.id_moeda_origem = 2 AND
-                    T.id_moeda_destino = 1 AND
+            WHERE	T.id_moeda_origem = :IdMoedaOrigem AND
+                    T.id_moeda_destino = :IdMoedaDestino AND
                     T.id_produto IS NULL
             ORDER BY T.id_taxa_moeda DESC""", nativeQuery = true)
     TaxaMoedaEntity UltimaTaxaCambio(
@@ -72,4 +72,10 @@ public interface TaxaRepository extends JpaRepository<TaxaMoedaEntity, Long> {
             @Param("IdMoedaDestino") Integer IdMoedaDestino,
             @Param("IdProduto") Integer IdProduto
     );
+
+    @Query(value = "SELECT COUNT(T.id_taxa_moeda) FROM Taxa_Moeda AS T WITH(NOLOCK) WHERE T.id_produto = :IdProduto", nativeQuery = true)
+    Integer verificaTaxaPorProduto(@Param("IdProduto") Long IdProduto);
+
+    @Query(value = "SELECT COUNT(T.id_taxa_moeda) FROM Taxa_Moeda AS T WITH(NOLOCK) WHERE (T.id_moeda_origem = :IdMoeda OR T.id_moeda_destino = :IdMoeda)", nativeQuery = true)
+    Integer verificaTaxaPorMoeda(@Param("IdMoeda") Long IdMoeda);
 }

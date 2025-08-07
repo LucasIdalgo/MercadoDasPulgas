@@ -20,28 +20,19 @@ public interface TaxaMapper {
 
     List<Taxas> mapListTaxaEntityParaListTaxa(List<TaxaMoedaEntity> taxaMoedasEntity);
 
-    @Mapping(target = "IdTaxaMoeda", source = "idTaxaMoeda")
-    @Mapping(target = "Data", source = "data")
-    @Mapping(target = "MoedaOrigem.IdMoeda", source = "idMoedaOrigem")
-    @Mapping(target = "Taxa", source = "taxa")
-    @Mapping(target = "MoedaDestino.IdMoeda", source = "idMoedaDestino")
-    @Mapping(target = "Produto.IdProduto", source = "idProduto")
-    @Mapping(target = "Operacao", source = "operacao")
-    TaxaMoedaEntity mapTaxaParaTaxaEntity(Taxas taxa);
-
     TaxaCompleta mapTaxaEntityParaTaxaCompleta(TaxaMoedaEntity taxaMoedaEntity);
 
     @Named("mapIdMoeda")
     default Integer mapIdMoeda(MoedasEntity moeda){
         if(moeda == null) return null;
 
-        return Integer.parseInt(moeda.getIdMoeda().toString());
+        return moeda.getIdMoeda().intValue();
     }
 
     @Named("mapIdProduto")
     default Integer mapIdProduto(ProdutosEntity produto){
         if(produto == null) return null;
 
-        return Integer.parseInt(produto.getIdProduto().toString());
+        return produto.getIdProduto().intValue();
     }
 }

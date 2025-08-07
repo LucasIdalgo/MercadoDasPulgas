@@ -2,6 +2,7 @@ package com.challenge.Desafio.Repositories;
 
 import com.challenge.Desafio.Entities.TransacoesEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
@@ -10,7 +11,7 @@ import java.time.LocalDate;
 import java.util.List;
 
 @Repository
-public interface TransacaoRepository extends JpaRepository<TransacoesEntity, Long> {
+public interface TransacaoRepository extends JpaRepository<TransacoesEntity, Long>, JpaSpecificationExecutor<TransacoesEntity> {
     @Query(value = """           
             SELECT	T.id_transacao,
                     T.data_transacao,
@@ -41,4 +42,13 @@ public interface TransacaoRepository extends JpaRepository<TransacoesEntity, Lon
             @Param("Periodo") Integer Periodo,
             @Param("DataInicial") LocalDate DataInicial,
             @Param("DataFinal") LocalDate DataFinal);
+
+    @Query(value = "SELECT COUNT(T.id_transacao) FROM Transacoes AS T WITH(NOLOCK) WHERE T.id_produto = :IdProduto", nativeQuery = true)
+    Integer verificaTransacaoPorProduto(@Param("IdProduto") Long IdProduto);
+
+    @Query(value = "SELECT COUNT(T.id_transacao) FROM Transacoes AS T WITH(NOLOCK) WHERE T.id_reino = :IdReino", nativeQuery = true)
+    Integer verificaTransacaoPorReino(@Param("IdReino") Long IdReino);
+
+    @Query(value = "SELECT COUNT(T.id_transacao) FROM Transacoes AS T WITH(NOLOCK) WHERE (T.id_moeda_origem = :IdMoeda OR T.id_moeda_destino = :IdMoeda)", nativeQuery = true)
+    Integer verificaTransacaoPorMoeda(@Param("IdMoeda") Long IdMoeda);
 }

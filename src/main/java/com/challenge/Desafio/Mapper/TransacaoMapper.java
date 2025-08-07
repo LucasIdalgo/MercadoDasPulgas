@@ -22,18 +22,6 @@ public interface TransacaoMapper {
 
     List<Transacoes> mapListTransacaoEntityParaListTransacoes(List<TransacoesEntity> transacoesEntity);
 
-    @Mapping(target = "IdTransacao", source = "idTransacao")
-    @Mapping(target = "DataTransacao", source = "dataTransacao")
-    @Mapping(target = "TipoTransacao", source = "tipoTransacao")
-    @Mapping(target = "MoedaOrigem.IdMoeda", source = "idMoedaOrigem")
-    @Mapping(target = "MoedaDestino.IdMoeda", source = "idMoedaDestino")
-    @Mapping(target = "Produto.IdProduto", source = "idProduto")
-    @Mapping(target = "Reino.IdReino", source = "idReino")
-    @Mapping(target = "Quantidade", source = "quantidade")
-    @Mapping(target = "ValorTransacao", source = "valorTransacao")
-    @Mapping(target = "ValorFinalTransacao", source = "valorFinalTransacao")
-    TransacoesEntity mapTransacoesParaTransacaoEntity(Transacoes transacoes);
-
     TransacaoCompleta mapTransacaoEntityParaTransacaoCompleta(TransacoesEntity transacoesEntity);
 
     @Named("mapIdMoeda")

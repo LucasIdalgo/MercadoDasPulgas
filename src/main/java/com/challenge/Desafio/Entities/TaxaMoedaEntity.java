@@ -1,5 +1,6 @@
 package com.challenge.Desafio.Entities;
 
+import com.challenge.Desafio.Enums.Operacao;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -39,6 +40,7 @@ public class TaxaMoedaEntity {
     @JoinColumn(name = "IdProduto", foreignKey = @ForeignKey(name = "FK_Produto_Taxa"))
     private ProdutosEntity Produto;
 
+    @Enumerated(EnumType.ORDINAL)
     @Column(name = "Operacao", nullable = false)
-    private Long Operacao;
+    private Operacao Operacao;
 }

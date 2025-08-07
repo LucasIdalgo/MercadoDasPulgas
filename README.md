@@ -48,8 +48,8 @@ CONSTRAINT FK_MoedaDestino_Taxa FOREIGN KEY (IdMoedaDestino) REFERENCES Moedas(I
 CONSTRAINT FK_Produto_Taxa FOREIGN KEY (IdProduto) REFERENCES Produtos(IdProduto)
 );
 
-INSERT INTO TaxaMoeda (Data, IdMoedaOrigem, Taxa, IdMoedaDestino, Operacao) VALUES(GETDATE(), 1, '2.5', 2, 0);
-INSERT INTO TaxaMoeda (Data, IdMoedaOrigem, Taxa, IdMoedaDestino, Operacao) VALUES(GETDATE(), 2, '2.5', 1, 1);
+INSERT INTO TaxaMoeda (Data, IdMoedaOrigem, Taxa, IdMoedaDestino, Operacao) VALUES(GETDATE(), 1, '2.5', 2, 1);
+INSERT INTO TaxaMoeda (Data, IdMoedaOrigem, Taxa, IdMoedaDestino, Operacao) VALUES(GETDATE(), 2, '2.5', 1, 0);
 
 CREATE TABLE Transacoes(
 IdTransacao INT PRIMARY KEY IDENTITY(1,1),
